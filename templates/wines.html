@@ -1,0 +1,67 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles2.css')}}">
+	</head>
+		<body>
+			<div class="pane">
+				<div class="header">
+					<h1>{{category.name}}</h1>
+						<figure class="creator">
+							<img src="{{ creator.picture}}">
+								<figcaption>{{creator.username}}</figcaption>
+						</figure>
+						<div class="login">
+							{%if 'username' not in session %}
+								<a href="{{url_for('showLogin')}}">
+									<button class="btn">Click Here to Login</button>
+									</a>
+							{% else %}
+								<a href="{{url_for('disconnect')}}">Logout </a>
+							{% endif %}
+						</div>
+				</div>
+				<div class="createNewWine">
+					<a href = '{{url_for('newWine', category_id = category.id) }}'> Create New Wine</a>
+				</div>
+				<div class="flash">
+					{% with messages = get_flashed_messages() %}
+						{% if messages %}
+						<ul>
+							{% for message in messages %}
+								<li>
+								<strong> {{message}}</strong>
+								</li>
+							{% endfor %}		
+						</ul>
+						{% endif %}
+					{% endwith %}
+				</div>
+
+					<h2>Wines</h2>
+						{% for w in wine %}
+								<div class="wine">
+									<span class="name">
+										<p>{{w.name}}</p>
+									</span>
+									<span class="price">
+										<p> {{w.price}} </p>	
+									</span>	
+								</div>
+								<div class="description">
+									<p>{{w.origin}}</p>
+								</div>	
+								<div class="description">
+									<p>{{w.description}}</p>
+								</div>	
+								<div class="editdeletepane">
+									<a href="{{url_for('editWineItem', category_id = category.id, wine_id = w.id) }}" >Edit</a>
+									<a href="{{url_for('deleteWineItem', category_id = category.id, wine_id = w.id) }}" >Delete</a>
+								</div>
+								<br>	
+						{% endfor %}
+
+				<div class="createNewWine">
+				<a href = '{{url_for('showCategories', category = category) }}'> Show Categories</a>
+			</div>		
+		</body>
+</html>

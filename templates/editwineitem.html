@@ -1,0 +1,24 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles2.css')}}">
+	</head>
+		<body>
+			<div class="pane">
+				<h1>Edit Wine Item</h1>>
+				<form action="{{url_for('editWineItem', category_id = category_id, wine_id = wine_id, editedWine = editedWine)}}" method='POST'>
+					<dl>
+						<dt>Name:</dt>
+							<dd><input type="text" size='99' name="name" placeholder="{{editedWine.name}}"></dd>
+						<dt>Origin:</dt>
+							<dd><input type="text" size='99' name="origin"  placeholder="{{editedWine.origin}}"></dd>
+						<dt>Description:</dt>
+							<dd><textarea name="description" rows="6" cols="99" placeholder="{{editedWine.description}}"></textarea></dd>
+						<dt>Price:</dt>
+							<dd><input type="text" size='9' name="price"  placeholder="{{editedWine.price}}"></dd>
+					</dl>
+				<input type="submit" value="Edit">
+				<a href="{{url_for('showWines', category_id = category_id)}}"> Cancel </a>
+				</form>
+			</div>
+		</body>
+</html>

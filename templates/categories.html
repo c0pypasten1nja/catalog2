@@ -1,0 +1,52 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles2.css')}}">
+	</head>
+		<body>
+			<div class="pane">
+				<div class="header">
+					<h1>Categories</h1>
+						<div class="login">
+							{%if 'username' not in session %}
+								<a href="{{url_for('showLogin')}}">
+									<button class="btn">Click Here to Login</button>
+									</a>
+							{% else %}
+								<a href="{{url_for('disconnect')}}">Logout </a>
+							{% endif %}
+						</div>
+				</div>
+				<div class="createNewCategory">
+					<a href = "{{url_for('newCategory') }}"> Create New Category</a>
+				</div>
+				<div class="flash">
+					{% with messages = get_flashed_messages() %}
+						{% if messages %}
+						<ul>
+							{% for message in messages %}
+								<li>
+								<strong> {{message}}</strong>
+								</li>
+							{% endfor %}		
+						</ul>
+						{% endif %}
+					{% endwith %}
+				</div>
+				{% for c in category %}
+						<div class="name">
+							<dl  class="category">
+								<a href="{{url_for('showWines', category_id = c.id)}}">{{c.name}}</a>				
+							</dl>
+						</div>
+						<div class="description">
+							<p>{{c.description}}</p>
+						</div>	
+						<div class="editdeleteCategory">
+							<a href="{{url_for('editCategory', category_id = c.id) }}" >Edit</a>
+							<a href="{{url_for('deleteCategory', category_id = c.id) }}" >Delete</a>
+							<br>
+						</div>
+				{% endfor %}
+			</div>
+		</body>
+</html>

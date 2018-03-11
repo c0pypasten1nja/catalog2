@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<title>Edit Category</title>
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles2.css')}}">
+	</head>
+	<body>	
+		<div class="pane">
+			<h1>Edit {{editedCategory.name}}</h1>
+				<div class="login">
+					{%if 'username' not in session %}
+						<a href="{{url_for('showLogin')}}">
+							<button class="btn">Click Here to Login</button>
+						</a>
+					{% else %}
+						<a href="{{url_for('disconnect')}}">Logout </a>
+					{% endif %}
+				</div>
+			<form action="{{url_for('editCategory', category_id = editedCategory.id)}}" method="POST">
+				<dl>
+					<dt>Name:</dt>
+						<dd><input type="text" size='99' name="name" placeholder="{{editedCategory.name}}"></textarea></dd>
+					<dt>Description:</dt>
+						<dd><textarea name="description" rows="6" cols="99" placeholder="{{editedCategory.description}}"></textarea></dd>
+				</dl>
+				<input type="submit" value="Edit">
+				<a href='{{url_for('showCategories') }}'> Cancel </a>				
+			</form>
+		</div>
+	</body>
+</html>

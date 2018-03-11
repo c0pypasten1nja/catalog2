@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<title>Create New Category</title>
+		<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles2.css')}}">
+	</head>
+	<body>
+		<h1>New Category</h1>
+			<div class="login">
+				{%if 'username' not in session %}
+					<a href="{{url_for('showLogin')}}">
+						<button class="btn">Click Here to Login</button>
+						</a>
+				{% else %}
+					<a href="{{url_for('disconnect')}}">Logout </a>
+				{% endif %}
+			</div>
+		<div class="pane">
+			<form action="{{ url_for('newCategory')}}" method="POST">
+				<dl>
+					<dt>Name:</dt>
+						<dd><input type="text" size='99' name="name" required></dd>
+					<dt>Description:</dt>
+						<dd><textarea type="text" rows="6" cols="99" name="description" required></textarea></dd>
+				</dl>
+				<input type="submit" value="Create">
+				<a href='{{url_for('showCategories') }}'> Cancel </a>
+			</form>
+		</div>
+	</body>
+</html>

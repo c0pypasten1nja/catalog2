@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Create New Wine Item</title>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles2.css')}}">
+</head>
+<body>
+	<div class="header">
+		<h1>New Wine Item</h1>
+			<figure class="creator">
+				<img src="{{ creator.picture}}">
+				<figcaption>{{creator.username}}</figcaption>
+			</figure>
+			<div class="login">
+				{%if 'username' not in session %}
+					<a href="{{url_for('showLogin')}}">
+						<button class="btn">Click Here to Login</button>
+					</a>
+				{% else %}
+					<a href="{{url_for('disconnect')}}">Logout </a>
+				{% endif %}
+			</div>
+	</div>
+	<div class="pane">
+	<form action="{{url_for('newWine', category_id = category_id)}}" method="POST">
+		<dl>
+			<dt>Name:</dt>
+				<dd><input type="text" size='99' name="name" placeholder="Name of the wine"></dd>
+			<dt>Origin:</dt>
+				<dd><input type="text" size='99' name="origin"  placeholder="Origin of the wine"></dd>
+			<dt>Description:</dt>
+				<dd><textarea name="description" rows="6" cols="99" placeholder="Description of the wine"></textarea></dd>
+			<dt>Price:</dt>
+				<dd><input type="text" size='9' name="price"  placeholder="Price in $"></dd>
+		</dl>
+		<input type="submit" value="Create">
+		<a href="{{url_for('showWines', category_id = category_id)}}"> Cancel </a>
+	</div>	
+	</form>>
+</body>
+</html>>
