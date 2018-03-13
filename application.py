@@ -314,9 +314,9 @@ def newCategory():
 # Edit a category
 @app.route('/catalog/<int:category_id>/edit/', methods=['GET', 'POST'])
 def editCategory(category_id):
-    editedCategory = session.query(Category).filter_by(id=category_id).one()
     if 'username' not in login_session:
-        return redirect('/login')
+        return redirect('/login')    
+    editedCategory = session.query(Category).filter_by(id=category_id).one()
     if editedCategory.user_id != login_session['user_id']:
         flash('You are not authorised to edit this category.')
     if request.method == 'POST':
@@ -334,9 +334,9 @@ def editCategory(category_id):
 # Delete a category
 @app.route('/catalog/<int:category_id>/delete/', methods=['GET', 'POST'])
 def deleteCategory(category_id):
-    categoryToDelete = session.query(Category).filter_by(id=category_id).one()
     if 'username' not in login_session:
-        return redirect('/login')
+        return redirect('/login')    
+    categoryToDelete = session.query(Category).filter_by(id=category_id).one()
     if categoryToDelete.user_id != login_session['user_id']:
         flash('You are not authorised to delete this category.')
     if request.method == 'POST':
@@ -389,10 +389,10 @@ def newWine(category_id):
 # Edit a wine item
 @app.route('/catalog/<int:category_id>/wine/<int:wine_id>/edit', methods=['GET', 'POST'])
 def editWineItem(category_id, wine_id):
-    editedWine = session.query(Wine).filter_by(id=wine_id).one()
-    category = session.query(Category).filter_by(id=category_id).one()
     if 'username' not in login_session:
         return redirect('/login')
+    editedWine = session.query(Wine).filter_by(id=wine_id).one()
+    category = session.query(Category).filter_by(id=category_id).one()
     if editedWine.user_id != login_session['user_id']:
         flash("You are not authorised to edit wines of this category.")
     if request.method == 'POST':
@@ -416,10 +416,10 @@ def editWineItem(category_id, wine_id):
 # Delete a wine item
 @app.route('/catalog/<int:category_id>/wine/<int:wine_id>/delete', methods=['GET', 'POST'])
 def deleteWineItem(category_id, wine_id):
-    category = session.query(Category).filter_by(id=category_id).one()
-    wineToDelete = session.query(Wine).filter_by(id=wine_id).one()
     if 'username' not in login_session:
         return redirect('/login')
+    category = session.query(Category).filter_by(id=category_id).one()
+    wineToDelete = session.query(Wine).filter_by(id=wine_id).one()
     if wineToDelete.user_id != login_session['user_id']:
         flash("You are not authorised to delete wines of this category.")
     if request.method == 'POST':
